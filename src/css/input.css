@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .card-green {
+    @apply bg-green-300 border-2 border-green-900 px-4 py-2 rounded-xl;
+  }
+  .card-green p {
+    @apply text-green-700 font-bold
+  }
+
+  .card-red {
+    @apply bg-red-300 border-2 border-red-900 px-4 py-2 rounded-xl;
+  }
+  .card-red p {
+    @apply text-red-700 font-bold
+  }
+
+  .card-blue {
+    @apply bg-blue-300 border-2 border-blue-900 px-4 py-2 rounded-xl;
+  }
+  .card-blue p {
+    @apply text-blue-700 font-bold
+  }
+
+  .card-yellow {
+    @apply bg-yellow-300 border-2 border-yellow-900 px-4 py-2 rounded-xl;
+  }
+  .card-yellow p {
+    @apply text-yellow-700 font-bold
+  }
+
+  .card-stone {
+    @apply bg-stone-300 border-2 border-stone-900 px-4 py-2 rounded-xl;
+  }
+  .card-stone p {
+    @apply text-stone-700 font-bold
+  }
+}
+
+@layer base {
+  @font-face {
+    font-family: IRANYekanX;
+    font-style: normal;
+    font-weight: 300;
+    src: url("./fonts/woff/IRANYekanX-Light.woff") format("woff"),
+      url("./fonts/woff2/IRANYekanX-Light.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: IRANYekanX;
+    font-style: normal;
+    font-weight: 900;
+    src: url("./fonts/woff/IRANYekanX-Black.woff") format("woff"),
+      url("./fonts/woff2/IRANYekanX-Black.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: IRANYekanX;
+    font-style: normal;
+    font-weight: 950;
+    src: url("./fonts/woff/IRANYekanX-ExtraBlack.woff") format("woff"),
+      url("./fonts/woff2/IRANYekanX-ExtraBlack.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: IRANYekanX;
+    font-style: normal;
+    font-weight: bold;
+    src: url("./fonts/woff/IRANYekanX-Bold.woff") format("woff"),
+      url("./fonts/woff2/IRANYekanX-Bold.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: IRANYekanX;
+    font-style: normal;
+    font-weight: normal;
+    src: url("./fonts/woff/IRANYekanX-Regular.woff") format("woff"),
+      url("./fonts/woff2/IRANYekanX-Regular.woff2") format("woff2");
+  }
+  html {
+    font-family: IRANYekanX;
+    @apply bg-zinc-600 text-white;
+  }
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}

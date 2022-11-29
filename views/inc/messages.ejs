@@ -1,0 +1,17 @@
+<% if (messageListObj?.anyMessage) { %>
+    <% for (message of messageListObj.list ) {%>
+        <% if (message.color === 'red') {%>
+            <div class="card-red my-2">
+        <% } else if (message.color === 'green') {%>
+            <div class="card-green my-2">
+        <% } else if (message.color === 'yellow') {%>
+            <div class="card-yellow my-2">
+        <% } else if (message.color === 'blue') {%>
+            <div class="card-blue my-2">
+        <% } else if (message.color === 'stone') {%>
+            <div class="card-stone my-2">
+        <% } %>
+            <p><span>- </span><%= message.msg %></p>
+        </div>
+    <% } %>
+<% } %>

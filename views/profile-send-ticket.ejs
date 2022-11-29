@@ -1,0 +1,55 @@
+<!doctype html>
+<html dir="rtl">
+
+<head>
+  <%- include('inc/heade')%>
+  <title>NinjaGamer | ارسال تیکت جدید</title>
+</head>
+
+<body>
+  <%- include('inc/nav')%>
+    <%- include('inc/header')%>
+      <div
+        class="bg-zinc-800 mx-3 md:container md:mx-auto my-5 rounded-xl flex flex-col lg:flex-row border-2 border-amber-500">
+        <%- include('inc/profile-aside') %>
+          <div class="lg:w-10/12">
+            <header class="py-5">
+              <h3 class="text-center text-xl md:text-3xl font-semibold">به پنل کاربری <span
+                  class="text-yellow-500 font-black">نینجا گیمر</span>خوش آمدید.</h3>
+            </header>
+            <div class="flex flex-col p-5">
+              <p class="">قبل از ارسال تیکت ابتدا در بخش <span class="font-bold text-amber-500"><a
+                    href="#">آموزش</a></span> نسبت به یافتن سوال خود اقدام کنید و درصورتی که جواب خود را پیدا نکردید
+                نسبت به ارسال تیکت پشتیبانی اقدام فرمایید.</p>
+            </div>
+            <form class="py-2 px-5" method="POST">
+              <input type="hidden" name="csrf_token" value="<%= csrf_token %>">
+              <div class="flex flex-col lg:flex-row lg:justify-evenly space-y-4 lg:space-y-0">
+                <div class="w-full lg:w-2/6">
+                  <label for="title">موضوع:</label>
+                  <input class="h-8 w-full lg:w-5/6 rounded-xl font-bold bg-stone-700 px-3" type="text" name="title" id="title" required>
+                </div>
+                <div class="w-full lg:w-2/6">
+                  <label for="subject">دسته بندی:</label>
+                  <select class="h-8 px-2 w-full lg:w-9/12 rounded-xl font-bold bg-stone-700" name="subject" id="subject">
+                    <% if (subjects) { %>
+                      <% for (subject of subjects) { %>
+                        <option value="<%= subject.id %>"><%= subject.name %></option>
+                      <% } %>
+                    <% } %>
+                  </select>
+                </div>
+                <div class="">
+                  <button class="border-2 border-amber-500 rounded-xl py-1 px-3 transition hover:text-black hover:bg-amber-500">ارسال</button>
+                </div>
+              </div>
+              <div class="flex flex-col mt-4">
+                <label for="content">پیام:</label>
+                <textarea required class="h-32 rounded-xl font-bold bg-stone-700 p-4" name="content" id="content"></textarea>
+              </div>
+            </form>
+          </div>
+      </div>
+</body>
+
+</html>

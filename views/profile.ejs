@@ -1,0 +1,52 @@
+<!doctype html>
+<html dir="rtl">
+
+<head>
+  <%- include('inc/heade')%>
+  <title>NinjaGamer | پروفایل کاربری</title>
+</head>
+
+<body>
+  <%- include('inc/nav')%>
+  <%- include('inc/header')%>
+  <div class="bg-zinc-800 mx-3 md:container md:mx-auto my-5 rounded-xl flex flex-col lg:flex-row border-2 border-amber-500">
+    <%- include('inc/profile-aside') %>
+    <div class="lg:w-10/12">
+      <header class="py-5">
+        <h3 class="text-center text-xl md:text-3xl font-semibold">به پنل کاربری <span class="text-yellow-500 font-black">نینجا گیمر</span>خوش آمدید.</h3>
+      </header>
+      <div class="mx-4 mt-3">
+        <%- include('inc/messages' , {messageListObj : msgListObj}) %>
+      </div>
+      <div class="flex flex-col space-y-4 md:space-y-0 text-center md:flex-row text-xl justify-around">
+        <p>شماره همراه ( نام کاربری ) : <span dir="ltr" class="text-sky-500 font-bold"><%= current_user.number %></span></p>
+        <p>نوع حساب کاربری : <span dir="ltr" class="text-sky-500 font-bold capitalize"><%= current_user.rank %></span></p>
+        <!-- <p>اکانت استیم : <span dir="ltr" class="text-sky-500 font-bold">NixyMan</span></p> -->
+      </div>
+      <div class="flex flex-col lg:flex-row p-5">
+        <form class="lg:w-8/12 flex flex-col lg:flex-row lg:items-center" method="POST">
+          <input type="hidden" name="csrf_token" value="<%= csrf_token %>">
+          <label class="w-max" for="number">شماره همراه:</label>
+          <div class="flex flex-col items-center space-y-2 lg:space-y-0 lg:flex-row lg:w-10/12">
+            <input value="<%= '0' + current_user.number.slice(3) %>" dir="ltr" class="h-8 w-full lg:w-6/12 px-4 lg:mx-2 rounded-xl font-bold bg-stone-700" type="number" name="number" id="number" placeholder="0902*******">
+            <button class="w-max md:min-w-fit px-3 py-1 rounded-xl border-2 border-yellow-600 transition hover:text-black hover:bg-yellow-500">تغییر شماره همراه</button>
+          </div>
+        </form>
+        <form action="/account/profile/change_password" class="lg:w-8/12 flex flex-col lg:flex-row lg:items-center" method="POST">
+          <input type="hidden" name="csrf_token" value="<%= csrf_token %>">
+          <label class="w-max" for="password">رمز عبور جدید:</label>
+          <div class="flex flex-col items-center space-y-2 lg:space-y-0 lg:flex-row lg:w-10/12">
+            <input dir="ltr" class="h-8 w-full lg:w-6/12 px-4 lg:mx-2 rounded-xl font-bold bg-stone-700" type="password" name="password" id="password" placeholder="رمز عبور جدید">
+            <button class="w-max md:min-w-fit px-3 py-1 rounded-xl border-2 border-yellow-600 transition hover:text-black hover:bg-yellow-500">تغییر رمز عبور</button>
+          </div>
+        </form>
+        <!-- <div class="lg:w-4/12 flex flex-col items-center my-5">
+          <span class="text-center my-2">شما میتوانید اکانت استیم خود را به نینجا گیمر وصل کنید.</span>
+          <button type="submit" class="w-max md:min-w-fit px-3 py-1 rounded-xl border-2 border-sky-600 transition hover:text-black hover:bg-sky-500">اتصال اکانت استیم</button>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

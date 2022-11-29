@@ -1,0 +1,83 @@
+<!doctype html>
+<html dir="rtl">
+
+<head>
+  <%- include('inc/heade')%>
+  <title>NinjaGamer | <%= ticket.title %></title>
+</head>
+
+<body>
+  <%- include('inc/nav')%>
+  <%- include('inc/header')%>
+  <div class="bg-zinc-800 mx-3 md:container md:mx-auto my-5 rounded-xl flex flex-col lg:flex-row border-2 border-amber-500">
+    <%- include('inc/profile-aside') %>
+    <div class="lg:w-10/12">
+      <header class="py-5">
+        <h3 class="text-center text-xl md:text-3xl font-semibold">به پنل کاربری <span class="text-yellow-500 font-black">نینجا گیمر</span>خوش آمدید.</h3>
+      </header>
+      <div class="mx-4">
+        <%- include('inc/messages' , {messageListObj:msgListObj}) %>
+      </div>
+      <div class="m-4">
+        <header>
+            <h4 class="text-3xl text-center md:text-right">
+                موضوع : <span class="font-semibold"><%= ticket.title %></span>
+            </h4>
+            <div class="my-4 flex flex-col items-center space-y-2 md:space-y-0 md:flex-row-reverse md:justify-end space-x-4">
+                <p class="px-3 py-1 bg-orange-700 rounded">دسته بندی : <span class="font-semibold"><%= ticket.Subject.name %></span></p>
+                <p class="px-3 py-1 bg-indigo-700 rounded" >
+                    تاریخ ایجاد : <span class="font-semibold"><%= new Intl.DateTimeFormat('fa-IR', { dateStyle: 'long', timeStyle: 'short' }).format(ticket.createdAt) %></span>
+                </p>
+                <p class="px-3 py-1 bg-rose-800 rounded" >
+                    شماره تیکت : <span class="font-semibold"><%= ticket.id %></span>
+                </p>
+                <p class="px-3 py-1 bg-lime-800 rounded" >
+                    وضعیت تیکت: <span class="font-semibold"><%= ticket.state %></span>
+                </p>
+            </div>
+          </header>
+          <div class="m-4"><%= ticket.content %></div>
+          <% if (comments.length >= 1) {%>
+            <div class="my-2 flex flex-col-reverse space-y-reverse space-y-2">
+              <% for (comment of comments) { %>
+              <div class="bg-stone-600 rounded p-4">
+                <header class="flex flex-col space-y-2 md:space-y-0 md:flex-row-reverse md:space-x-2 md:justify-end">
+                  <% if (comment.User.rank === 'normal' || comment.User.rank ==='vip') {%>
+                    <p class="bg-orange-700 rounded px-2 py-1">
+                      پاسخ کاربر
+                    </p>
+                  <%} else {%>
+                    <p class="bg-green-700 rounded px-2 py-1">
+                      پاسخ ادمین
+                    </p>
+                    <% } %>
+                    <p class="bg-purple-900 rounded px-2 py-1">تاریخ : <span class="font-semibold"><%= new Intl.DateTimeFormat('fa-IR', { dateStyle: 'long', timeStyle: 'short' }).format(comment.createdAt) %></span></p>
+                </header>
+                <p class="font-semibold mt-2">
+                  <%= comment.content %>
+                </p>
+              </div>
+              <% } %>
+            </div>
+          <% } %>
+          <footer class="flex flex-col">
+            <h4 class="font-semibold text-xl my-2">
+              ارسال پاسخ
+            </h4>
+            <form action="/account/profile/ticket/<%= ticket.id %>" method="POST">
+              <input type="hidden" value="<%= csrf_token %>" name="csrf_token">
+              <textarea required class="h-32 w-full rounded-xl font-bold bg-stone-700 p-4" name="ticket_comment" id="ticket_comment"></textarea>
+              <button class="border-2 border-amber-500 rounded-xl py-1 px-5 transition hover:text-black hover:bg-amber-500">ثبت</button>
+            </form>
+            <% if (current_user.rank ==='admin') {%>
+            <form class="my-1" action="/account/profile/ticket/close/<%= ticket.id %>" method="POST">
+              <button class="bg-red-800 rounded px-2 py-1 " type="submit">بستن</button>
+            </form>
+            <% } %>
+          </footer>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

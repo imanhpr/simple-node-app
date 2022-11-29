@@ -1,0 +1,64 @@
+<!doctype html>
+<html dir="rtl">
+
+<head>
+  <%- include('inc/heade')%>
+  <title>NinjaGamer | تیکت ها</title>
+</head>
+
+<body>
+  <%- include('inc/nav')%>
+    <%- include('inc/header')%>
+      <div
+        class="bg-zinc-800 mx-3 md:container md:mx-auto my-5 rounded-xl flex flex-col lg:flex-row border-2 border-amber-500">
+        <%- include('inc/profile-aside') %>
+          <div class="lg:w-10/12">
+            <header class="py-5">
+              <h3 class="text-center text-xl md:text-3xl font-semibold">به پنل کاربری <span
+                  class="text-yellow-500 font-black">نینجا گیمر</span>خوش آمدید.</h3>
+            </header>
+            <div class="px-4 overflow-x-auto">
+                <table class="w-[28rem] min-w-full sm:w-full">
+                    <thead>
+                      <tr class="border-b-2 border-b-sky-500 text-xl">
+                        <th class="mx-4">شماره تیکت</th>
+                        <th class="mx-4">وضعیت</th>
+                        <th class="mx-4">دسته بندی</th>
+                        <th class="mx-4">تاریخ</th>
+                        <th class="mx-4">موضوع</th>
+                      </tr>
+                    </thead>
+                    <tbody class="text-xl text-center">
+                      <% if (tickets.length === 0) {%>
+                        <tr class="text-2xl"><td colspan="4" class="text-center py-2">تیکتی برای نمایش وجود ندارد</td></tr>
+                      <%} else {%>
+                        <% for (ticket of tickets) { %>
+                          <tr class="my-4">
+                            <td class="py-3"><%= ticket.id %></td>
+                            <% if (ticket.state === "در انتظار پاسخ") {%>
+                              <td class="py-3 w-40"><span class="bg-orange-600 rounded-lg px-3 py-1"><%= ticket.state %></span></td>
+                              <% } else if (ticket.state === 'در حال برسی') {%>
+                              <td class="py-3 w-40"><span class="bg-blue-600 rounded-lg px-3 py-1"><%= ticket.state %></span></td>
+                              <% } else if (ticket.state === 'پاسخ ادمین') {%>
+                              <td class="py-3 w-40"><span class="bg-indigo-600 rounded-lg px-3 py-1"><%= ticket.state %></span></td>
+                              <% } else if (ticket.state === 'پاسخ کاربر') {%>
+                              <td class="py-3 w-40"><span class="bg-green-700 rounded-lg px-3 py-1"><%= ticket.state %></span></td>
+                              <% } else if (ticket.state === 'بسته شده') {%>
+                              <td class="py-3 w-40"><span class="bg-red-600 rounded-lg px-3 py-1"><%= ticket.state %></span></td>
+                              <% } else {%>
+                                <td class="py-3 w-40"><span class="bg-red-600 rounded-lg px-3 py-1"><%= ticket.state %></span></td>
+                              <% } %>
+                            <td class="py-3"><%= ticket.Subject.name %></td>
+                            <td class="py-3"><%= ticket.farsiDate %></td>
+                            <td class="py-3 font-semibold text-indigo-400"><a href="/account/profile/ticket/<%= ticket.id %>"><%= ticket.title %></a></td>
+                          </tr>  
+                          <% } %>
+                      <% } %>
+                    </tbody>
+                  </table>
+            </div>
+          </div>
+      </div>
+</body>
+
+</html>

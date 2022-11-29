@@ -1,0 +1,20 @@
+<!doctype html>
+<html dir="rtl">
+
+<head>
+  <%- include('inc/heade')%>
+  <script src="https://widget.arcaptcha.ir/1/api.js" async defer></script>
+  <% if (path === '/account/login') {%>
+    <title>NinjaGamer | ورود به حساب کاربری</title>
+  <% } else {%>
+    <title>NinjaGamer | ثبت نام حساب کاربری جدید</title>
+  <% } %>
+</head>
+
+<body>
+  <%- include('inc/nav')%>
+  <%- include('inc/header')%>
+  <%- include('inc/authform' ,{messageListObj : messageListObj})%>
+</body>
+
+</html>

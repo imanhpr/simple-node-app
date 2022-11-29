@@ -1,0 +1,3 @@
+app: "ninjagamer"
+platform : "node"
+port : 8000

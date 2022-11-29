@@ -1,0 +1,39 @@
+<div class="bg-zinc-800 py-4 mx-4 md:container md:mx-auto my-5 rounded-xl md:w-1/2 lg:w-2/5">
+    <header>
+        <h2 class="text-2xl font-semibold text-center text-amber-500"><%= title %></h2>
+    </header>
+    <div class="mx-4 mt-3">
+        <%- include('./messages' , {messageListObj : messageListObj}) %>
+    </div>
+    <form method="POST" class="p-5 space-y-4 flex flex-col">
+        <input type="hidden" name="csrf_token" value="<%= csrf_token %>">
+        <div class="flex flex-col">
+            <label for="number" class="mb-1 text-amber-500">تلفن همراه</label>
+            <input dir="ltr" class="outline outline-1 outline-orange-300 px-6 rounded-2xl h-12 bg-slate-300 text-black font-bold" type="number" name="number" id="number" placeholder="0902*******" required>
+        </div>
+        <div class="flex flex-col">
+            <label for="password" class="mb-1 text-amber-500">پسورد</label>
+            <input dir="ltr" class="outline outline-1 outline-orange-300 px-6 rounded-2xl h-12 bg-slate-300 text-black font-bold" type="password" name="password" id="password" required>
+            <% if (path === '/account/register') { %>
+                <span class="py-1 px-3 text-stone-300">طول رمز عبور حداقل باید 6 کارکتر باشد.</span>
+            <% } %>
+        </div>
+        <% if (path === '/account/login') { %>
+            <div>
+                <a href="/account/forgetpass" class="underline underline-offset-8">بازیابی رمز عبور</a>
+            </div>
+        <% } else {%>
+            <div class="flex flex-row-reverse justify-end space-x-3">
+                <label for="news_active">دوست دارم از آخرین اخبار و رویداد ها ( Events ) از طریق پیامک خبر دار شوم.</label>
+                <input class="w-6 h-6 rounded-full accent-amber-600" type="checkbox" name="news_active" id="news_active">
+            </div>
+            <div>
+                <p class="underline underline-offset-8 text-center">ثبت نام شما به نشانه قبول <a href="/rules" class="text-amber-400 font-semibold">قوانین</a> نینجاگیمر میباشد.</p>
+            </div>
+        <% } %>
+        <div class="flex flex-col items-center justify-center">
+            <div class="arcaptcha" data-theme="dark" data-site-key="<%= ARC_SITE_KEY %>"></div>
+        </div>
+        <button type="submit" class="px-4 py-2 outline outline-2 outline-amber-500 w-1/4 self-center rounded-xl"><%= btn %></button>
+    </form>
+</div>
